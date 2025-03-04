@@ -1,163 +1,251 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-	<head>
-		<meta charset="utf-8" />
-	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-		<title>ECharts扩展示例</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/app.css" />
-	</head>
-	
-	<body class="bg06">
-		<header class="header">
-			<h3>美食全中国</h3>
-		</header>
-		
-		<div class="wrapper">
-			<div class="container-fluid">
-				<div class="row fill-h">
-					<!-- 左侧面板 -->
-					<div class="col-lg-3 fill-h">
-						<div class="xpanel-wrapper xpanel-wrapper-1-2">
-							<div class="xpanel">
-								<div class="fill-h"></div>
-							</div>
-						</div>
-						<div class="xpanel-wrapper xpanel-wrapper-1-2">
-							<div class="xpanel">
-								<div class="fill-h"></div>
-							</div>
-						</div>
-					</div>
-					<!-- 中间地图区域 -->
-					<div class="col-lg-6 fill-h">
-						<div class="xpanel-wrapper xpanel-wrapper-1">
-							<div class="xpanel">
-								<div class="fill-h" id="mapChart"></div>
-							</div>
-						</div>
-					</div>
-					<!-- 右侧面板 -->
-					<div class="col-lg-3 fill-h">
-						<div class="xpanel-wrapper xpanel-wrapper-1-2">
-							<div class="xpanel">
-								<div class="fill-h"></div>
-							</div>
-						</div>
-						<div class="xpanel-wrapper xpanel-wrapper-1-2">
-							<div class="xpanel">
-								<div class="fill-h"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="js/echarts-3.8.5.min.js"></script>
-		<script type="text/javascript" src="js/echarts-map-china.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				/*************** 中国地图 **************/
-				const mapChart = echarts.init(document.getElementById("mapChart"));
-				(function() {
-					let data = [
-						{"name": "辽宁", "value": 77},
-						{"name": "吉林", "value": 42},
-						{"name": "黑龙江", "value": 72},
-						{"name": "四川", "value": 81},
-						{"name": "湖北", "value": 47},
-						{"name": "福建", "value": 67},
-						{"name": "深圳", "value": 82},
-						{"name": "广东", "value": 66},
-						{"name": "重庆", "value": 24},
-						{"name": "湖南", "value": 92},
-						{"name": "上海", "value": 95},
-						{"name": "江苏", "value": 91},
-						{"name": "浙江", "value": 94},
-						{"name": "安徽", "value": 64},
-						{"name": "北京", "value": 91},
-						{"name": "天津", "value": 65},
-						{"name": "山东", "value": 98},
-						{"name": "山西", "value": 83},
-						{"name": "河南", "value": 100},
-						{"name": "河北", "value": 70},
-						{"name": "内蒙古", "value": 11},
-						{"name": "江西", "value": 23},
-						{"name": "贵州", "value": 45},
-						{"name": "云南", "value": 36},
-						{"name": "西藏", "value": 9},
-						{"name": "陕西", "value": 21},
-						{"name": "甘肃", "value": 54},
-						{"name": "青海", "value": 48},
-						{"name": "宁夏", "value": 36},
-						{"name": "新疆", "value": 24},
-						{"name": "广西", "value": 68},
-						{"name": "海南", "value": 99},
-						{"name": "台湾", "value": 88}
-					];
-					
-					let opt = {
-						visualMap: {
-					        show: true,  // 显示颜色图例
-					        orient: 'horizontal',
-					        left: 'center',
-					        top: 'bottom',
-					        min: 0,
-					        max: 100,
-					        textStyle: {
-					            color: '#fff'
-					        },
-					        inRange: {
-					            color: ['#aed8fe', '#57a1fc', '#3a73b8', '#2B32B2']
-					        }
-					    },
-						geo: {
-							map: 'china',
-					        roam: false,
-					        zoom: 1.2,  // 稍微放大地图
-							selectedMode: false,
-							left: '5%',  // 调整边距使地图居中
-							right: '5%',
-							top: '5%',
-							bottom: '5%',
-							layoutCenter: ['50%', '50%'],
-							layoutSize: '95%',  // 控制地图大小
-					        label: {
-					            emphasis: {
-					                show: true,
-					                textStyle: {
-					                	fontSize: 10,
-					                	color: '#fff'
-					                }
-					            }
-					        }
-						},
-						series: [{
-							type: 'map',
-							geoIndex: 0,
-							data: data,
-							emphasis: {  // 添加悬停效果
-								itemStyle: {
-									areaColor: '#ffd700'
-								},
-								label: {
-									show: true,
-									color: '#333'
-								}
-							}
-						}]
-					};
-					mapChart.setOption(opt);
-				})();
-				
-				/********** 窗口大小改变时，重置报表大小 ********************/
-				window.onresize = function() {
-					mapChart.resize();
-				};
-			});
-		</script>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <title>美食全中国</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <style>
+      #randomSelectContainer {
+        text-align: center;
+        margin-top: 20px; /* 顶部间距 */
+        padding: 10px;
+      }
+
+      #randomSelectBtn {
+        font-size: 18px;
+        padding: 10px 20px;
+        width: 80%; /* 自适应宽度 */
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      #randomSelectBtn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      #selectedCity {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffd700;
+        text-align: center;
+        margin-top: 50px; /* 离按钮更远 */
+      }
+
+      #cityListContainer {
+        height: 150px; /* 固定高度，超出部分滚动 */
+        overflow: hidden; /* 隐藏溢出内容 */
+        margin-top: 20px; /* 与选中城市间隔 */
+      }
+
+      #cityList {
+        display: inline-block;
+        animation: scrollCities 10s linear infinite; /* 自动滚动动画 */
+      }
+
+      @keyframes scrollCities {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-100%);
+        }
+      }
+
+      #cityList span {
+        display: block;
+        font-size: 18px;
+        text-align: center;
+        padding: 5px 0;
+        color: #fff;
+      }
+
+      #mapChart {
+        height: 600px; /* 固定高度 */
+        overflow-y: auto; /* 超出时滚动 */
+      }
+    </style>
+  </head>
+
+  <body class="bg06">
+    <header class="header">
+      <h3>美食全中国</h3>
+    </header>
+
+    <div class="wrapper">
+      <div class="container-fluid">
+        <div class="row fill-h">
+          <!-- 左侧面板 -->
+          <div class="col-lg-3 fill-h">
+            <div class="xpanel-wrapper xpanel-wrapper-1">
+              <div class="xpanel">
+                <div id="randomSelectContainer">
+                  <!-- 添加随机选择按钮 -->
+                  <button id="randomSelectBtn">随机选择</button>
+                  <!-- 显示选中的城市 -->
+                  <div id="selectedCity">选中的城市将在这里显示</div>
+                  <!-- 滚动的城市列表 -->
+                  <div id="cityListContainer">
+                    <div id="cityList"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 中间地图区域 -->
+          <div class="col-lg-6 fill-h">
+            <div class="xpanel-wrapper xpanel-wrapper-1">
+              <div class="xpanel">
+                <div id="mapChart"></div>
+              </div>
+            </div>
+          </div>
+          <!-- 右侧面板 -->
+          <div class="col-lg-3 fill-h">
+            <div class="xpanel-wrapper xpanel-wrapper-1-2">
+              <div class="xpanel">
+                <div class="fill-h"></div>
+              </div>
+            </div>
+            <div class="xpanel-wrapper xpanel-wrapper-1-2">
+              <div class="xpanel">
+                <div class="fill-h"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/echarts-3.8.5.min.js"></script>
+    <script type="text/javascript" src="js/echarts-map-china.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        /*************** 中国地图 **************/
+        const mapChart = echarts.init(document.getElementById("mapChart"));
+        let previousCity = null;
+        const data = [
+          { name: "辽宁", value: 77 },
+          { name: "吉林", value: 42 },
+          { name: "黑龙江", value: 72 },
+          { name: "四川", value: 81 },
+          { name: "湖北", value: 47 },
+          { name: "福建", value: 67 },
+          { name: "深圳", value: 82 },
+          { name: "广东", value: 66 },
+          { name: "重庆", value: 24 },
+          { name: "湖南", value: 92 },
+          { name: "上海", value: 95 },
+          { name: "江苏", value: 91 },
+          { name: "浙江", value: 94 },
+          { name: "安徽", value: 64 },
+          { name: "北京", value: 91 },
+          { name: "天津", value: 65 },
+          { name: "山东", value: 98 },
+          { name: "山西", value: 83 },
+          { name: "河南", value: 100 },
+          { name: "河北", value: 70 },
+          { name: "内蒙古", value: 11 },
+          { name: "江西", value: 23 },
+          { name: "贵州", value: 45 },
+          { name: "云南", value: 36 },
+          { name: "西藏", value: 9 },
+          { name: "陕西", value: 21 },
+          { name: "甘肃", value: 54 },
+          { name: "青海", value: 48 },
+          { name: "宁夏", value: 36 },
+          { name: "新疆", value: 24 },
+          { name: "广西", value: 68 },
+          { name: "海南", value: 99 },
+          { name: "台湾", value: 88 },
+        ];
+
+        // 初始化所有城市列表
+        const cities = data.map((city) => city.name);
+        const $cityList = $("#cityList");
+        cities.forEach((city) => {
+          $cityList.append(`<span>${city}</span>`);
+        });
+        // 克隆列表以实现无缝滚动
+        $cityList.append($cityList.html());
+
+        let countdown = 3;
+
+        $("#randomSelectBtn").click(function () {
+          $("#randomSelectBtn").prop("disabled", true);
+
+          const intervalID = setInterval(() => {
+            $("#selectedCity").text(`倒计时: ${countdown--}`);
+            if (countdown < 0) {
+              clearInterval(intervalID);
+              countdown = 3;
+
+              const selectedCityIndex = Math.floor(Math.random() * cities.length);
+              const selectedCity = cities[selectedCityIndex];
+              $("#selectedCity").text(`选中的城市: ${selectedCity}`);
+
+              if (previousCity !== null) {
+                mapChart.dispatchAction({
+                  type: "downplay",
+                  name: previousCity,
+                });
+              }
+
+              mapChart.dispatchAction({
+                type: "highlight",
+                name: selectedCity,
+              });
+              mapChart.dispatchAction({
+                type: "showTip",
+                name: selectedCity,
+              });
+
+              previousCity = selectedCity;
+              $("#randomSelectBtn").prop("disabled", false);
+            }
+          }, 1000);
+        });
+
+        let opt = {
+          visualMap: {
+            show: true,
+            min: 0,
+            max: 100,
+            inRange: {
+              color: ["#aed8fe", "#57a1fc", "#3a73b8", "#2B32B2"],
+            },
+          },
+          geo: {
+            map: "china",
+            zoom: 1.2,
+            roam: true,
+          },
+          series: [
+            {
+              type: "map",
+              geoIndex: 0,
+              data: data,
+            },
+          ],
+        };
+        mapChart.setOption(opt);
+
+        /********** 窗口大小改变时，重置报表大小 ********************/
+        window.onresize = function () {
+          mapChart.resize();
+        };
+      });
+    </script>
+  </body>
 </html>
